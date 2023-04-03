@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>中富金石合作签约</title>
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>  
+	<div style="font-size:0;position:relative;">
+		<ul class="step-box">
+			<li v-for="i in stepNum"  :key="i" :class="[i <= stepVal ? 'active' : '']"><i></i></li>
+		</ul>
+		<p class="step-tip">第1步：登录及验证</p>
+        <van-image :src="item"  v-for="(item ,index) in proCombatB" :key="index"  style="position:relative;z-index: 1;">
+			<template v-slot:loading>
+			   <van-loading type="spinner" size="50"  vertical />
+			</template>
+		</van-image>
+	</div>
+</div>
+</body>
+</html>

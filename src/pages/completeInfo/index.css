@@ -1,0 +1,128 @@
+#app {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+#app .sure-title {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.8);
+  padding: 16px;
+  font-weight: bold;
+}
+#app .sure-title.van-cell::after {
+  border: none;
+}
+#app .sure-title.top-line {
+  border-top: solid 13px rgba(216, 216, 216, 0.2);
+}
+#app .max-title .van-field__label {
+  width: 130px;
+}
+#app .van-field--error .van-field__control,
+#app .van-field--error .van-field__control::placeholder {
+  color: rgba(0, 0, 0, 0.8);
+}
+#app .van-hairline--top-bottom::after {
+  border: none;
+}
+#app .detail-address textarea {
+  border: solid 1px rgba(151, 151, 151, 0.3);
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 4px;
+}
+#app .border-input input {
+  border: solid 1px rgba(0, 0, 0, 0.1);
+}
+#app .van-field__label{
+	font-size: 14px;
+	color: rgba(0,0,0,0.8);
+}
+#app .detail-address{
+	display: block;
+	width: 100%;
+}
+#app .detail-address .van-field__label{
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+}
+#app .van-cell{
+	padding: 10px 15px;
+}
+#app .van-field__control--right{
+	color: rgba(0,0,0,0.8);
+	font-size: 15px;
+}
+.popbox{
+	border-radius: 16px 16px 0 0;
+	overflow: hidden;
+}
+.popbox .van-cell{
+	text-align: center;
+}
+.info-tip{
+	padding: 10px 15px 13px;
+	background: rgba(241,241,241,0.6);
+	border-radius: 4px;
+	font-size: 14px;
+	color: rgba(0,0,0,0.5);
+	line-height: 17px;
+	margin: 15px;
+}
+#app .read-statement{
+	display: inline-block;
+	vertical-align: text-top;
+}
+#app .read-statement .van-checkbox__icon{
+	margin-right: 7px;
+}
+.van-toast--html, .van-toast--text{
+	padding: 14px 20px !important;
+}
+
+#app .red::after{
+	border-color: #FF1313;
+}
+
+#app .red .van-field__label,
+#app .red .van-field__control--right,
+#app .red .van-field__value .van-field__control::placeholder,
+#app .red .van-cell__right-icon{
+	color: #FF1313;
+}
+#app .van-picker__title{
+	font-size: 18px;
+}
+#app .van-picker__confirm,#app .van-picker__cancel{
+	font-size: 16px;
+}
+#app .van-picker__confirm{
+	color: #0370FF;
+}
+#app .popbox  .van-area .van-picker__toolbar{
+	padding: 10px 0;
+}
+#app .extOtherIpt{
+	width: 90%;
+	margin: 20px auto 10px;
+	border:solid 1px rgba(151, 151, 151, 0.3);
+	border-radius: 4px;
+}
+#app .otherBtn{
+	width: 60%;
+	margin: 0 auto;
+}
+#app .otherBtn .van-button{
+	border: none;
+}
+#app .other-closeBtn{
+	color: rgba(0, 0, 0, 0.60);
+}
+#app .other-confirmBtn{
+	color: #0370FF;
+	float: right;
+}
+#app .van-cell::after{
+	border-bottom: 1px solid rgba(221,221,221,0.5);
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>中富金石合作签约</title>
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+	<ul class="step-box">
+		<li v-for="i in stepNum"  :key="i" :class="[i <= stepVal ? 'active' : '']"><i></i></li>
+	</ul>
+	<p class="step-tip">第2步：投资者信息登记</p>
+	  <van-field :class="nameTip ? 'red' : ''"  label="投资者姓名"  @focus="nameTip = false"   v-model="info.cardName"  placeholder="请输入"   required  input-align="right" ></van-field>
+	  <van-field :class="extraInvestorTip ? 'red' : ''"  label="实际控制投资自然人" @focus="extraInvestorTip = false"  label-width="9em" v-model="info.extraInvestor"  required  input-align="right" readonly  is-link   placeholder="请选择" @click="addOtherInfo(1)"></van-field>
+	  <van-field :class="extraBeneficiaryTip ? 'red' : ''"  label="交易实际收益人" @focus="extraBeneficiaryTip = false"   label-width="7em"  v-model="info.extraBeneficiary"  required   input-align="right" readonly  is-link   placeholder="请选择" @click="addOtherInfo(2)"></van-field>
+	  <van-field :class="cardNumTip ? 'red' : ''" label="二代身份证号码" @focus="cardNumTip = false"   label-width="7em" v-model="info.cardNum"   required  input-align="right"  @input="setCard"></van-field>
+	  <van-field :class="sexTip ? 'red' : ''" label="性别"  @focus="sexTip = false"   v-model="info.sex"  placeholder="请输入"  required input-align="right" ></van-field>
+	  <van-field :class="birthDataTip ? 'red' : ''" label="出生日期" @focus="birthDataTip = false"    v-model="info.cardBirth" placeholder="请输入"  required  input-align="right"></van-field>
+	  <van-field :class="endDataTip ? 'red' : ''" label="身份证有效期" @focus="endDataTip = false"   v-model="info.cardEndDate" input-align="right"  required  @click="upEndDate=true;"></van-field>
+	  <van-field :class="nationalityTip ? 'red' : ''" label="国籍"   v-model="info.cardCountry"  readonly  required  input-align="right" ></van-field>
+	  <van-field :class="extraOccupationTip ? 'red' : ''" v-if="profession&&profession[proRadio]"  error required label="职业" placeholder="请选择"  :value="profession[proRadio].optName" readonly is-link input-align="right" @click="proSelect=true;extraOccupationTip = false;"></van-field>
+	  <van-field :class="extraCompanyNameTip ? 'red' : ''" label="工作单位" v-model="params.extraCompanyName" @focus="extraCompanyNameTip = false"  input-align="right" placeholder="请填写工作单位"  required></van-field>
+	  <van-field :class="extraPostTip ? 'red' : ''" label="职务" v-model="params.extraPost" @focus="extraPostTip = false" input-align="right" placeholder="请填写职务" required ></van-field>
+	  <van-field :class="extraEducationTip ? 'red' : ''" v-if="educationBackground&&educationBackground[eduRadio]"  error required label="学历" :value="educationBackground[eduRadio].optName" readonly is-link input-align="right" @click="eduSelect=true;extraEducationTip = false;"></van-field>
+	  <van-field :class="extraEmailTip ? 'red' : ''" label="电子邮箱" v-model="params.extraEmail"  @focus="extraEmailTip = false" input-align="right"  placeholder="请填写电子邮箱" ></van-field>				   
+	  <van-field :class="extraCityTip ? 'red' : ''" label="省市区" v-model="addressName"  input-align="right"  readonly required is-link placeholder="请选择" @click="showProvinceCode=true;extraCityTip = false;"></van-field>
+	  <van-field :class="extraAddressTip ? 'red' : ''" class="detail-address" @focus="extraAddressTip = false"  required v-model="params.extraAddress" rows="3" autosize label="请填写详细联系地址" type="textarea" placeholder="如：万年场路99号花样年华郡27楼3单元2107室"></van-field>
+	  <van-field :class="extraCreditRemarkTip ? 'red' : ''" label="不良诚信记录"  v-model="params.extraCreditName" input-align="right" error  required  is-link  @click="changeSincerity"  placeholder="请选择" ></van-field>		
+	  <div class="info-tip">
+          <van-checkbox class="read-statement" v-model="checked" icon-size="15px" label-disabled></van-checkbox>本人保证资金来源的合法性和所提供资料的真实性、准确性、完整性，并对其承担责任。
+      </div>
+	  <div class="normal-paragraph">
+		  <van-button type="info" size="large" class="pay-btn" :disabled="!checked" @click="saveInfo()">确认并进入下一步</van-button>
+	  </div>
+	  <van-popup v-model="extraSelect" position="bottom" class="popbox">
+	      <van-radio-group v-model="extRadio" class="iphoneX-padding">
+	          <van-cell-group>
+	              <template v-for="(item,index) in extraArr">
+	                  <van-cell :title="item.optName" clickable @click="selectExtraRadio(index)">
+	                      <template #right-icon>
+	                      <van-radio :name="index" style="display: none;"  :disabled="index===0"/>
+	                      </template>
+	                  </van-cell>
+	              </template>
+	          </van-cell-group>
+	      </van-radio-group>
+	  </van-popup>
+	 <van-popup v-model="extOtherInfo" position="bottom" class="popbox">
+		<van-field v-model="otherExtra"  :formatter="formatter2" class="extOtherIpt" :center="true" placeholder="请输入"  maxlength="10"></van-field>
+		<div class="otherBtn">
+			<van-button class="other-closeBtn" type="default" @click="extClose">取消</van-button>
+			<van-button class="other-confirmBtn" type="default" @click="extConfirm">确定</van-button>
+		</div>
+	  </van-popup>
+	  <van-popup v-model="upEndDate" position="bottom" class="popbox">
+		<div style="position: absolute;left: 50%;top: 6px;margin-left: -15px;z-index: 2009;" >
+			<van-button type="info"   plain  size="small" @click="setUserDate(2)">长期</van-button>
+		</div>
+		<van-datetime-picker
+		  v-model="setEndDate"
+		  type="date"
+		  :formatter="formatter"
+		  :min-date="minDate"
+		  :max-date="maxDate"
+		  title=""
+		  @cancel="upEndDate=false"
+		  @confirm="setUserDate(1)"
+		/>
+	  </van-popup>
+      <van-popup v-model="eduSelect" position="bottom" class="popbox">
+          <van-radio-group v-model="eduRadio" class="iphoneX-padding">
+              <van-cell-group>
+                  <template v-for="(item,index) in educationBackground">
+                      <van-cell :title="item.optName" clickable @click="selectRadio(1,index)">
+                          <template #right-icon>
+                              <van-radio :name="index" style="display: none;"  :disabled="index===0"/>
+                          </template>
+                      </van-cell>
+                  </template>
+              </van-cell-group>
+          </van-radio-group>
+      </van-popup>
+      <van-popup v-model="proSelect" position="bottom"  class="popbox">
+          <van-radio-group v-model="proRadio" class="iphoneX-padding">
+              <van-cell-group>
+                  <template v-for="(item,index) in profession">
+                      <van-cell :title="item.optName" clickable @click="selectRadio(2,index)">
+                          <template #right-icon>
+                              <van-radio :name="index" style="display: none;" :disabled="index===0"/>
+                          </template>
+                      </van-cell>
+                  </template>
+              </van-cell-group>
+          </van-radio-group>
+          <template v-if="profession&&profession[proRadio]&&profession[proRadio].dictValue===otherPro&&proSelect">
+              <van-field v-model="otherProfession" label="请注明" :border="true" class="border-input" maxlength="14"></van-field>
+              <div class="normal-paragraph">
+                  <van-button type="info" style="margin:16px auto;" size="large" @click="selectRadio(5)">确定</van-button>
+              </div>
+          </template>
+      </van-popup>
+      <van-popup v-model="recordSelect" position="bottom" class="popbox">
+          <van-radio-group v-model="recordRadio" class="iphoneX-padding">
+              <van-cell-group>
+                  <template v-for="(item,index) in recordItem">
+                      <van-cell :title="item.optName" clickable @click="selectRadio(3,index)">
+                          <template #right-icon>
+                              <van-radio :name="index" style="display: none;"  :disabled="index===0"/>
+                          </template>
+                      </van-cell>
+                  </template>
+              </van-cell-group>
+          </van-radio-group>
+          <template v-if="recordItem&&recordItem[recordRadio]&&recordItem[recordRadio].optName==='其他'">
+              <van-cell>
+                  <van-field
+					  style="border:solid 1px rgba(151, 151, 151, 0.3);margin-bottom: 60px;"
+					  v-model="other"
+					  rows="3"
+					  autosize
+					  maxlength="50"
+					  show-word-limit
+					  type="textarea"
+                  />
+              </van-cell>
+              <div class="normal-paragraph">
+                  <van-button type="info" style="margin:16px auto;" size="large" @click="selectRadio(4)">确定</van-button>
+              </div>
+          </template>
+      </van-popup>
+      <van-popup v-model="showProvinceCode" position="bottom" class="popbox">
+          <van-area :area-list="addressList" ref="areapicker" :columns-num="3" :value="areaVal"  title="请选择省市区" @cancel="showProvinceCode = false"   @confirm="selectAddressCode"  class="iphoneX-padding"></van-area>
+      </van-popup>
+</div>
+</body>
+</html>

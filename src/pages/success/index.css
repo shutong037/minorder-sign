@@ -1,0 +1,51 @@
+#app {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+.congratulation-name {
+	height: 16px;
+	line-height: 16px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #1B1B1B;
+	padding: 0 16px;
+	margin-top: 40px;
+}
+.congratulation {
+	line-height: 28px;
+	padding: 0 24px 0 21px;
+	font-size: 16px;
+	color: #1B1B1B;
+	margin: 20px auto auto;
+	background-color: #fff;
+}
+.congratulation span{
+	color: #FF1818;
+}
+.download-btn {
+	position: absolute;
+	left: 50%;
+	bottom: 43px;
+	width: 90%;
+	margin-left: -45%;
+}
+.download-btn .van-button{
+	border-radius: 4px;
+}
+.pulse{
+	animation:pulse 1s linear infinite;
+	-webkit-animation:pulse 1s linear infinite;
+}
+@-webkit-keyframes pulse {
+	0% {-webkit-transform:scale(1);}
+	50% {-webkit-transform:scale(1.1);}
+	100% {-webkit-transform:scale(1);}
+}
+@keyframes pulse {
+	0% {transform:scale(1)}
+	50% {transform:scale(1.1)}
+	100% {transform:scale(1)}
+}
+
+/*# sourceMappingURL=success.css.map */

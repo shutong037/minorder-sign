@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>电子签名</title>
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+	<ul class="step-box">
+		<li v-for="i in stepNum"  :key="i" :class="[i <= stepVal ? 'active' : '']"><i></i></li>
+	</ul>
+	<p class="step-tip">第6步：签名</p>
+    <div class="canvasBox">
+		<div class="canvasBox_h">
+			<div class="canvasBox_border">
+				<img :src="dataSrc.lattice" alt=""><span>签名框</span>
+			</div>
+			<img class="canvas_tip" :src="dataSrc.tipImg" alt="">
+			<canvas id="can_vans"
+				width="270"
+				height="270"
+				v-show="canvasStatus"
+				@touchstart="touchStart"
+			    @touchmove="touchMove"
+			    @touchend="touchEnd"
+				@mousedown="mouseDown"
+				@mousemove="mouseMove"
+				@mouseup="mouseUp">当前微信浏览器不支持，请更换手机或升级微信再试！</canvas>
+		</div>
+		<p class="tip" v-html="tipName"></p>
+		<div class="btn-box">
+			<van-button type="default"  class="cancel_btn" size="normal" @click="overwrite"><img :src="dataSrc.no" alt=""></van-button>
+			<van-button type="default"  class="determine_btn" :disabled="commitStatus"  size="normal" @click="commit"><img :src="dataSrc.yes" alt=""></van-button>
+		</div>
+		<div :class="[imgborder ? 'imgbg' : '','sign-box']"  v-show="signList.length > 0">
+			<span  v-for="(item,index) in signList"  v-key="index" @click="delImg(index)">
+				<i v-show="index == signList.length - 1">x</i><img :src="item" alt="">
+			</span>
+		</div>
+		<p class="tip2">烦请您仔细阅读<span class="statement" @click="toggleProtocol(3)">《风险揭示书》、</span><span class="statement" @click="toggleProtocol(5)">《适当性资料》</span><span class="statement" @click="toggleProtocol(1)">《证券投资顾问服务协议》、</span><span class="statement" @click="toggleProtocol(4)">《服务项目说明书》</span>，如确认同意上述协议内容，请在上方签名。</p>
+		<p class="tip3">本人确认上述文本并熟知内容及其含义。</p>
+		<div class="fixed-bottom">
+		   <div class="normal-paragraph">
+			  <van-button type="info" :disabled="subSignStatus"  class="sign-btn"    @click="subSign">确认提交</van-button>
+		   </div>
+		</div>
+	</div>
+	<div class="layer" v-if="showProtocol">
+	    <div class="statement-content2">
+			<div class="logo"><img :src="dataSrc.logo" alt=""></div>
+	        <van-icon name="cross" color="rgba(0,0,0,0.5)" style="z-index:100;" @click="toggleProtocol(0)"></van-icon>
+	        <div v-html="protocolOne" class="protocol-con" v-if="showProtocol===1"></div>
+	        <div v-html="protocolTwo" class="protocol-con" v-if="showProtocol===2"></div>
+	        <div v-html="protocolThree" class="protocol-con" v-if="showProtocol===3"></div>
+	        <div v-html="protocolFour" class="protocol-content" v-if="showProtocol===4"></div>
+	        <div class="protocol-content" v-if="showProtocol===5">
+				<div class="the-title">适当性匹配意见</div>
+				<template v-if="result">
+					 <div class="normal-paragraph">
+						<p>尊敬的投资者：</p>
+						<p style="text-align:center;margin:15px 0;font-weight: bold;">{{userName}}</p>
+						<p>您的风险承受能力为：</p>
+						<div class="grade-box" :class="result.riskLevelCode">
+							<img class="grade-bg" :src="dataSrc[result.riskLevelCode]" alt="">
+							<div class="grade-txt">
+								<h2 :class="result.riskLevelCode">{{result.cusTypeName}} {{result.riskLevelCode}}</h2>
+							</div>
+						</div>
+					</div>	
+				</template>
+				<template v-if="goodInfo">
+					<div class="normal-paragraph">
+						<p style="margin-top:10px;">您拟购买的产品或服务：</p>
+						<div class="service-list">
+							<div class="circle">
+								<div class="grade"><span>{{goodInfo.goodsRiskLevelName}}</span></div>
+							</div>
+							<div class="circleBlue">
+								<div class="grade"><span>{{goodInfo.courseRiskLevelName}}</span></div>
+							</div>
+							<div class="circleYellow">
+								<div class="grade"><span>{{goodInfo.incrementRiskLevelName}}</span></div>
+							</div>
+						</div>
+						<div class="service-list">
+							<div class="service-name"><p>服务风险等级</p></div>
+							<div class="service-name"><p>课程服务风险等级</p></div>
+							<div class="service-name"><p>增值服务风险等级</p></div>
+						</div>
+						<button class="view-list" @click="toggleGrade()">（查看产品服务风险等级名录）</button>
+						<p>您拟购买的产品/拟接受的服务风险等级：</p>
+					</div>
+					<div class="course">
+						<img class="course-bg" :src="dataSrc.course" alt="">
+						<span>《{{goodInfo.goodsName}}》</span>
+					</div>
+				</template>
+				<button class="view-list" @click="toggleContent">（查看产品服务匹配清单及服务内容）</button>
+				<div class="the-hint">
+					<p>本公司已经向您充分揭示了该产品或服务的风险。您的风险承受能力等级与该产品或服务风险等级相匹配。本适当性评估意见供您决策参考，并不代表本公司对上述产品或服务的收益作出实质性判断和保证。</p>
+					<p>本公司就上述适当性评估意见与您进行确认，并建议您审慎考察该产品或服务的特征及风险，进行充分风险评估，自行做出投资决定。</p>
+				</div>
+			</div>
+	    </div>
+	</div>
+	<div class="layer" v-if="showGrade">
+		<div class="list-content2">
+			<van-icon name="cross" color="rgba(0,0,0,0.5)" @click="toggleGrade()"></van-icon>
+			<div class="layer-title">产品或服务风险等级名录</div>
+			<div class="list-con">
+				<p class="con-detail">为有效指引证券经营机构对产品或服务进行风险分级，依据《证券期货投资者适当性管理办法》第三十六条制定本名录。 </p>
+				<p class="con-detail">
+					证券经营机构应参考本名录并依据《办法》第十六条、第十七条规定细化本机构的产品或服务风险等级评价标准，科学有效评估产品或服务的风险等级，并根据法律法规、监管规定以及信用风险、市场风险、操作风险、流动性风险等方面的变化及时调整产品或服务的风险等级。</p>
+				<div class="grade-list" v-for="(item,index) in gradeList">
+					<div class="left">{{item.grade}}</div>
+					<div class="right">
+						<div class="one">{{item.title}}</div>
+						<div class="two">{{item.content}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="layer" v-if="showContent">
+		<div class="list-content2">
+			<div class="logo"><img :src="dataSrc.logo" alt=""></div>
+			<van-icon name="cross" color="rgba(0,0,0,0.5)" @click="toggleContent()"></van-icon>
+			<div class="layer-title">风险与产品或服务匹配清单及服务内容</div>
+			<div class="list-con">
+				<div class="risk-title initial">各个等级对应的产品或服务名称及风险等级如下：</div>
+				<div class="the-table">
+					<div class="table-title">
+						<div>评测等级</div>
+						<div>产品或服务名称</div>
+						<div>产品或服务风险等级</div>
+					</div>
+					<div class="table-content">
+						<div class="c1">保守型C1</div>
+						<div>—</div>
+						<div>—</div>
+					</div>
+					<div class="table-content">
+						<div class="c2">谨慎型C2</div>
+						<div>—</div>
+						<div>—</div>							
+					</div>
+					<div class="table-content">
+						<div>
+							<p class="c3">稳健型C3</p>
+							<p class="c4">积极型C4</p>
+							<p class="c5">激进型C5</p>
+						</div>
+						<div class="the-td">中富内参</div>
+						<div>
+							<div>R3 服务风险</div>
+						</div>
+					</div>
+				</div>
+				<div class="service-title">服务内容</div>
+				<div v-html="protocolFour"></div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

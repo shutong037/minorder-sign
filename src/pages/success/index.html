@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>中富金石合作签约</title>
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+	<ul class="step-box">
+		<li v-for="i in stepNum"  :key="i" :class="[i <= stepVal ? 'active' : '']"><i></i></li>
+	</ul>
+	<p class="step-tip">第8步：完成</p>
+	<p class="congratulation-name">尊敬的投资者，{{name}}</p>
+	<div class="congratulation"><span>恭喜</span>您完成所有流程，请下载中富投顾APP，签约审核通过后即可使用签约手机号和验证码登录APP享受投顾服务。</div>
+	<div class="download-btn pulse">
+		<van-button size="large" type="info" @click="openApp">下载中富投顾APP</van-button>
+	</div>
+</div>
+</body>
+</html>

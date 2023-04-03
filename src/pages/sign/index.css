@@ -1,0 +1,457 @@
+#app{
+  width: 100%;
+  height: 100%;
+  padding-bottom: 80px;
+  background-color: #fff;
+}
+.canvasBox_h{
+	position: relative;
+	width: 297px;
+	height: 297px;
+	margin: 0 auto;
+}
+.canvasBox{
+	position: relative;
+	width: 100%;
+	margin: 30px 0;
+}
+.canvasBox canvas{
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 297px;
+	height: 297px;
+	margin: 0 auto;
+	z-index: 3;
+}
+.canvas_tip{
+	position: relative;
+	width: 297px;
+	height: 297px;
+	margin: 0 auto;
+	z-index: 1;
+}
+.canvasBox_border{
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 297px;
+	height: 297px;
+	margin-left: -148px;
+	z-index: 2;
+}
+.canvasBox_border img{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 297px;
+	height: 297px;
+	z-index: 2;
+}
+.canvasBox_border span{
+	position: absolute;
+	top: 16px;
+	left: 12px;
+	font-size: 16px;
+	color: #999999;
+	z-index: 3;
+}
+.tip{
+	width: 100%;
+	height: 20px;
+	line-height: 20px;
+	color: #000000;
+	font-size: 16px;
+	margin: 10px auto 16px;
+	text-align: center;
+}
+.tip span{
+	color: #FA5151;
+}
+.btn-box{
+	position: relative;
+	display: flex;
+	width: 297px;
+	margin: 20px auto;
+	justify-content: space-around;
+	z-index: 5;
+}
+.btn-box .cancel_btn{
+	width: 121px;
+	height: 40px;
+	background: #A1A1A1;
+	color: #ffffff;
+	font-size: 20px;
+	border-radius: 4px 4px 4px 4px;
+}
+.btn-box .cancel_btn img{
+	width: 24px;
+	height: 24px;
+	vertical-align: middle;
+}
+.btn-box .determine_btn{
+	width: 121px;
+	height: 40px;
+	background: #006FFF;
+	color: #ffffff;
+	font-size: 20px;
+	border-radius: 4px 4px 4px 4px;
+	opacity: 1;
+}
+.btn-box .determine_btn img{
+	width: 19px;
+	height: 14px;
+	vertical-align: middle;
+}
+.sign-box{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 96%;
+	min-height: 70px;
+	margin: 30px auto;
+}
+.sign-box span{
+	display: inline-block;
+	position: relative;
+	width: 18%;
+	margin-right: 4px;
+	margin-bottom: 4px;
+}
+.sign-box img{
+	display: block;
+	width: 100%;
+}
+.sign-box span i{
+	display: none;
+}
+.imgbg span{
+	border: 1px solid #E1E1E1;
+	border-radius: 8px;
+}
+.imgbg span i{
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	color: #ffffff;
+	background-color: #AFAFAF;
+	border-radius: 50%;
+	display: block;
+}
+.tip2{
+	color: #000000;
+	font-size: 15px;
+	line-height: 24px;
+	text-indent: 2em;
+	margin: 20px auto 0;
+	padding: 0 15px;
+}
+.tip3{
+	color: #000000;
+	font-size: 15px;
+	line-height: 39px;
+	margin: 10px auto 0;
+	padding: 0 15px;
+}
+.tip2 .statement {
+  color: #006FFF;
+}
+#app .sign-btn{
+	display: block;
+	width: 100%;
+	height: 54px;
+	font-size: 17px;
+	color: #FFFFFF;
+	border-radius: 4px;
+}
+#app .protocol-con .contract {
+  text-align: right;
+  margin-top: 30px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+#app div .font-bold {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.8);
+}
+#app .font-con p,#app .confirmation p  {
+    margin-bottom: 20px;
+}
+#app .confirmation .font-bold{
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.8);
+}
+.layer .list-content2{
+	height: 94%;
+}
+.sign-txt .van-button--default{
+	color: rgba(0,0,0,0.3);
+}
+.sign-txt .van-dialog__confirm{
+	color: #006FFF;
+}
+
+#app .the-title {
+  width: calc(100% - 32px);
+  font-size: 17px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 24px;
+  text-align: center;
+  padding: 16px;
+}
+#app .view-list {
+  border: none;
+  background-color: inherit;
+  font-size: 15px;
+  color: rgba(0, 124, 211, 0.5);
+  text-align: center;
+  width: 100%;
+  line-height: 21px;
+  margin: 15px 0 19px;
+}
+#app .course {
+  border: none;
+  box-sizing: border-box;
+  text-align: center;
+  max-width: 280px;
+  padding: 0 8px;
+  height: 49px;
+  background: rgba(238, 88, 88, 0.8);
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFFFFF;
+  line-height: 49px;
+  margin: 20px auto 18px;
+  display: block;
+}
+#app .the-hint {
+  font-size: 14px;
+  color: #000000;
+  line-height: 23px;
+  padding: 16px 15px;
+}
+#app .the-hint p:first-child {
+  margin-bottom: 30px;
+}
+#app .service-list {
+  display: flex;
+  justify-content: space-around;
+}
+#app .service-list .service-name {
+  text-align: center;
+  white-space: nowrap;
+  width: 57px;
+  position: relative;
+  margin: 11px auto 18px;
+}
+#app .service-list .service-name p {
+  font-size: 12px;
+  font-weight: bold;
+  color: #000000;
+  line-height: 17px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+#app .circle,
+#app .circleBlue,
+#app .circleYellow {
+  margin: 25px auto 14px;
+  position: relative;
+  width: 57px;
+  height: 57px;
+}
+#app .circle:before,
+#app .circleBlue:before,
+#app .circleYellow:before,
+#app .circle:after,
+#app .circleBlue:after,
+#app .circleYellow:after {
+  content: '';
+  position: absolute;
+  width: 57px;
+  height: 57px;
+  background: rgba(250, 81, 81, 0.3);
+  top: -7px;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+#app .circle:before,
+#app .circleBlue:before,
+#app .circleYellow:before {
+  right: 7px;
+}
+#app .circle:after,
+#app .circleBlue:after,
+#app .circleYellow:after {
+  left: 7px;
+}
+#app .circle .grade,
+#app .circleBlue .grade,
+#app .circleYellow .grade {
+  width: 100%;
+  height: 100%;
+  background-color: #FA5151;
+  position: absolute;
+  left: 0;
+  top: 0;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  line-height: 57px;
+  text-align: center;
+  z-index: 3;
+}
+#app .circle .grade:before,
+#app .circleBlue .grade:before,
+#app .circleYellow .grade:before,
+#app .circle .grade:after,
+#app .circleBlue .grade:after,
+#app .circleYellow .grade:after {
+  content: '';
+  position: absolute;
+  width: 57px;
+  height: 57px;
+  background: rgba(250, 81, 81, 0.3);
+  bottom: -7px;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+#app .circle .grade:before,
+#app .circleBlue .grade:before,
+#app .circleYellow .grade:before {
+  right: 7px;
+}
+#app .circle .grade:after,
+#app .circleBlue .grade:after,
+#app .circleYellow .grade:after {
+  left: 7px;
+}
+#app .circle .grade > span,
+#app .circleBlue .grade > span,
+#app .circleYellow .grade > span {
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFFFFF;
+  position: relative;
+  z-index: 10;
+}
+#app .circleBlue:before,
+#app .circleBlue:after {
+  background: rgba(48, 110, 255, 0.3);
+}
+#app .circleBlue .grade {
+  background-color: #306EFF;
+}
+#app .circleBlue .grade:before,
+#app .circleBlue .grade:after {
+  background: rgba(48, 110, 255, 0.3);
+}
+#app .circleYellow:before,
+#app .circleYellow:after {
+  background: rgba(249, 170, 51, 0.3);
+}
+#app .circleYellow .grade {
+  background-color: #F9AA33;
+}
+#app .circleYellow .grade:before,
+#app .circleYellow .grade:after {
+  background: rgba(249, 170, 51, 0.3);
+}
+#app .normal-paragraph .product-btn{
+	display: block;
+	color: #FFFFFF;
+	font-weight: normal;
+	border-radius: 4px;
+	margin: 40px auto 15px;
+}
+#app .service-table{
+	font-size: 14px;
+	margin: 10px;
+	border-left: solid 1px rgba(151, 151, 151, 0.2);
+	border-right: solid 1px rgba(151, 151, 151, 0.2);
+}
+.protocol-content .service-table .tr > div:nth-child(2){
+	width: 79px;
+}
+.protocol-content .service-table .tr > div:nth-child(3){
+	width: calc(100% - 275px);
+}
+#app .layer .list-content .logo{
+	margin: 14px 12px 4px;
+}
+#app .layer .list-content .logo img{
+	display: block;
+	width: 100%;
+}
+.font-con p:nth-child(2){
+	font-weight: bold;
+}
+.risk-product{
+	padding: 0 14px;
+}
+.statement-content2 .protocol-content{
+	height: 98%;
+}
+
+.grade-box{
+	position: relative;
+	padding:24px 15px 10px;
+	margin: 0 auto;
+}
+.grade-bg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 120px;
+	z-index: 1;
+}
+.grade-txt{
+	position: relative;
+	z-index: 2;
+}
+.grade-txt h2{
+	width: 172px;
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+	font-size: 17px;
+	margin: 11px auto 0;
+	font-weight: bold;
+	background: linear-gradient(165deg, #FEE39A 0%, #F0BD68 100%);
+	border-radius: 5px;
+}
+.grade-txt .C1{
+	color: #19950D;
+}
+.grade-txt .C2{
+	color: #FF7D00;
+}
+.grade-txt .C3{
+	color: #006EFF;
+}
+.grade-txt .C4{
+	color: #F65253;
+}
+.grade-txt .C5{
+	color: #180808;
+}
+#app .normal-paragraph p{
+	font-size: 14px;
+}
